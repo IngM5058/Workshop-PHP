@@ -40,6 +40,7 @@
                     <th class="px-6 py-3 text-left text-xs font-medium text-light uppercase tracking-wider">Title</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-light uppercase tracking-wider">Description</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-light uppercase tracking-wider">Status</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-light uppercase tracking-wider">Category</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-light uppercase tracking-wider">Actions</th>
                 </tr>
             </thead>
@@ -52,6 +53,9 @@
                         </a>
                     </td>
                     <td class="px-6 py-4">{{ $task->description }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        {{ $task->category ? $task->category->name : __('Uncategorized') }}
+                    </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         @if ($task->completed)
                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-light text-primary">Completed</span>
