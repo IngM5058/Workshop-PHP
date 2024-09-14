@@ -33,7 +33,7 @@
         </div>
     </nav>
 
-    <div class="max-w-4xl mx-auto bg-secondary rounded-lg shadow-md overflow-hidden">
+    <div class="max-w-6xl mx-auto bg-secondary rounded-lg shadow-md overflow-hidden">
         <table class="min-w-full divide-y divide-accent">
             <thead class="bg-primary">
                 <tr>

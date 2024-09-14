@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Task;
+use App\Models\TaskCategory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,7 +14,8 @@ class TaskSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $categories = TaskCategory::all();
+
         $tasks = [
             [
                 'title' => 'Prepare quarterly report',
@@ -68,6 +70,7 @@ class TaskSeeder extends Seeder
         ];
 
         foreach ($tasks as $task) {
+            $task['task_category_id'] = $categories->random()->id;
             Task::create($task);
         }
     }
