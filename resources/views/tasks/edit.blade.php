@@ -34,26 +34,36 @@
     </nav>
 
     <div class="max-w-2xl mx-auto bg-secondary rounded-lg shadow-md overflow-hidden">
-        <form method="POST" class="p-6" action="{{ route('tasks.update', $task->id) }}">
+        <form action="{{ route('tasks.update', $task->id) }}" method="POST" class="space-y-4 p-6">
             @csrf
             @method('PUT')
             <div class="mb-4">
-                <label for="title" class="block text-sm font-medium text-light">Title</label>
-                <input type="text" name="title" id="title" value="{{ $task->title }}" class="mt-1 block w-full rounded-md bg-primary border-accent text-light focus:border-light focus:ring-light" required>
+                <label for="title" class="block text-sm font-medium text-light mb-2">Title</label>
+                <input type="text" name="title" id="title" value="{{ $task->title }}" class="mt-1 block w-full rounded-md bg-[#2E073F] text-white border-2 border-accent focus:border-light focus:ring-2 focus:ring-light p-3">
             </div>
             <div class="mb-4">
-                <label for="description" class="block text-sm font-medium text-light">Description</label>
-                <textarea name="description" id="description" rows="3" class="mt-1 block w-full rounded-md bg-primary border-accent text-light focus:border-light focus:ring-light" required>{{ $task->description }}</textarea>
+                <label for="description" class="block text-sm font-medium text-light mb-2">Description</label>
+                <textarea name="description" id="description" rows="3" class="mt-1 block w-full rounded-md bg-[#2E073F] text-white border-2 border-accent focus:border-light focus:ring-2 focus:ring-light p-3">{{ $task->description }}</textarea>
             </div>
             <div class="mb-4">
-                <label for="completed" class="inline-flex items-center">
-                    <select name="completed" id="completed" class="mt-1 block w-full rounded-md bg-primary border-accent text-light focus:border-light focus:ring-light">
-                        <option value="0" {{ !$task->completed ? 'selected' : '' }}>Not Completed</option>
-                        <option value="1" {{ $task->completed ? 'selected' : '' }}>Completed</option>
-                    </select>
-                </label>
+                <label for="category_id" class="block text-sm font-medium text-light mb-2">Category</label>
+                <select name="category_id" id="category_id" class="mt-1 block w-full rounded-md bg-[#2E073F] text-white border-2 border-accent focus:border-light focus:ring-2 focus:ring-light p-3">
+                    <option value="">Uncategorized</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}" {{ $task->category_id == $category->id ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
-            <div class="flex justify-end">
+            <div class="mb-4">
+                <label for="completed" class="block text-sm font-medium text-light mb-2">Status</label>
+                <select name="completed" id="completed" class="mt-1 block w-full rounded-md bg-[#2E073F] text-white border-2 border-accent focus:border-light focus:ring-2 focus:ring-light p-3">
+                    <option value="0" {{ $task->completed ? '' : 'selected' }}>Pending</option>
+                    <option value="1" {{ $task->completed ? 'selected' : '' }}>Completed</option>
+                </select>
+            </div>
+            <div>
                 <button type="submit" class="bg-accent hover:bg-light hover:text-primary text-primary font-bold py-2 px-4 rounded transition duration-300">Update Task</button>
             </div>
         </form>

@@ -34,25 +34,33 @@
     </nav>
 
     <div class="max-w-2xl mx-auto bg-secondary rounded-lg shadow-md overflow-hidden">
-        <form method="POST" class="p-6" action="{{ route('tasks.store') }}">
+        <form action="{{ route('tasks.store') }}" method="POST" class="space-y-4 p-6">
             @csrf
             <div class="mb-4">
-                <label for="title" class="block text-sm font-medium text-light">Title</label>
-                <input type="text" name="title" id="title" class="mt-1 block w-full rounded-md bg-primary border-accent text-light focus:border-light focus:ring-light" required>
+                <label for="title" class="block text-sm font-medium text-light mb-2">Title</label>
+                <input type="text" name="title" id="title" class="mt-1 block w-full rounded-md bg-[#2E073F] text-white border-2 border-accent focus:border-light focus:ring-2 focus:ring-light p-3">
             </div>
             <div class="mb-4">
-                <label for="description" class="block text-sm font-medium text-light">Description</label>
-                <textarea name="description" id="description" rows="3" class="mt-1 block w-full rounded-md bg-primary border-accent text-light focus:border-light focus:ring-light" required></textarea>
+                <label for="description" class="block text-sm font-medium text-light mb-2">Description</label>
+                <textarea name="description" id="description" rows="3" class="mt-1 block w-full rounded-md bg-[#2E073F] text-white border-2 border-accent focus:border-light focus:ring-2 focus:ring-light p-3"></textarea>
             </div>
             <div class="mb-4">
-                <label for="completed" class="inline-flex items-center">
-                    <select name="completed" id="completed" class="mt-1 block w-full rounded-md bg-primary border-accent text-light focus:border-light focus:ring-light">
-                        <option value="0">Not Completed</option>
-                        <option value="1">Completed</option>
-                    </select>
-                </label>
+                <label for="category_id" class="block text-sm font-medium text-light mb-2">Category</label>
+                <select name="category_id" id="category_id" class="mt-1 block w-full rounded-md bg-[#2E073F] text-white border-2 border-accent focus:border-light focus:ring-2 focus:ring-light p-3">
+                    <option value="">Uncategorized</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
             </div>
-            <div class="flex justify-end">
+            <div class="mb-4">
+                <label for="completed" class="block text-sm font-medium text-light mb-2">Status</label>
+                <select name="completed" id="completed" class="mt-1 block w-full rounded-md bg-[#2E073F] text-white border-2 border-accent focus:border-light focus:ring-2 focus:ring-light p-3">
+                    <option value="0">Pending</option>
+                    <option value="1">Completed</option>
+                </select>
+            </div>
+            <div>
                 <button type="submit" class="bg-accent hover:bg-light hover:text-primary text-primary font-bold py-2 px-4 rounded transition duration-300">Create Task</button>
             </div>
         </form>
